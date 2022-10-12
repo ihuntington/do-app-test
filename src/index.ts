@@ -1,12 +1,13 @@
 import Fastify from "fastify";
+import { prismaPlugin } from "./plugins";
+import { routes } from "./routes";
 
 const fastify = Fastify({
     logger: true,
 })
 
-fastify.get("/", async () => {
-    return { hello: "world" }
-})
+fastify.register(prismaPlugin)
+fastify.register(routes)
 
 async function start() {
     try {
